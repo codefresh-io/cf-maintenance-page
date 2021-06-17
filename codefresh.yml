@@ -7,15 +7,18 @@ stages:
 steps:
   build-step:
     type: build
+    stage: build
     image-name: codefresh/cf-maintenance-page
 
   push_to_dockerhub_registry:
     type: push
+    stage: push
     candidate: ${{build-step}}
     tag: ${{CF_BRANCH}}
 
  push_to_quay_registry:
-    type: push
+    type: push    
+    stage: push
     registry: cf-quay
     candidate: ${{build-step}}
     tag: ${{CF_BRANCH}}
