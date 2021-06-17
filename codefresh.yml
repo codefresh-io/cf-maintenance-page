@@ -16,7 +16,7 @@ steps:
     candidate: ${{build-step}}
     tag: ${{CF_BRANCH}}
 
- push_to_quay_registry:
+  push_to_quay_registry:
     type: push    
     stage: push
     registry: cf-quay
