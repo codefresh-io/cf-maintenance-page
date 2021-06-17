@@ -1,12 +1,24 @@
-version: '1.0'
+version: '1.1'
+
+stages:
+- build
+- push
 
 steps:
   build-step:
     type: build
+    stage: build
     image-name: codefresh/cf-maintenance-page
 
-  push to registry:
+  push_to_dockerhub_registry:
     type: push
+    stage: push
     candidate: ${{build-step}}
     tag: ${{CF_BRANCH}}
 
+  push_to_quay_registry:
+    type: push    
+    stage: push
+    registry: cf-quay
+    candidate: ${{build-step}}
+    tag: ${{CF_BRANCH}}
